@@ -4,53 +4,426 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 body {
-    background: linear-gradient(135deg, #0a0f1e 0%, #0a1a2f 50%, #0b2b3b 100%);
-    font-family: system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+}
+
+/* MAIN PAGE */
+.main-container {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+/* HEADER */
+.rover-header {
+    background: linear-gradient(90deg, #E91E63 0%, #C2185B 100%);
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    gap: 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    flex-shrink: 0;
+}
+
+.logo svg {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    flex: 1;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: opacity 0.2s;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.nav-links a.plus-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.manage-btn, .signin-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.manage-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.manage-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.signin-btn {
+    background: white;
+    color: #E91E63;
+}
+
+.signin-btn:hover {
+    background: #f5f5f5;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 60px 20px;
 }
 
-/* Demo button to trigger the frame */
-.demo-btn {
-    background: linear-gradient(95deg, #2c5a7a, #1e3a5a);
-    border: none;
-    padding: 14px 36px;
-    border-radius: 60px;
-    font-weight: bold;
-    font-size: 1rem;
+.signin-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 60px 50px;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+
+.signin-box h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.age-notice {
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.roblox-login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
     color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 20px rgba(44,90,122,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    margin-bottom: 20px;
 }
 
-.demo-btn:hover {
-    transform: scale(1.02);
+.roblox-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
 }
 
-/* SLIDE-DOWN FRAME MODAL */
+.roblox-logo {
+    width: 20px;
+    height: 20px;
+}
+
+.divider {
+    color: #666;
+    font-size: 13px;
+    margin: 20px 0;
+}
+
+.return-btn {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #444;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.return-btn:hover {
+    border-color: #666;
+    color: #ddd;
+}
+
+/* FOOTER */
+.rover-footer {
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 20px;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-section p {
+    font-size: 12px;
+    color: #888;
+}
+
+.footer-section a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: #ddd;
+}
+
+.footer-section h4 {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.imaginary-logo {
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+/* OAUTH SCREEN */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.oauth-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.oauth-card h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.oauth-content h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.oauth-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #444, transparent);
+    margin: 20px 0;
+}
+
+.roblox-logo-large {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.roblox-logo-large svg {
+    width: 100px;
+    height: 100px;
+}
+
+.continue-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 20px 0;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(233, 30, 99, 0.4);
+}
+
+.return-oauth-btn {
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #444;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.return-oauth-btn:hover {
+    border-color: #666;
+    color: #ddd;
+}
+
+/* REDIRECT SCREEN */
+.redirect-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 60px 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.redirect-card h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.redirect-card h2 {
+    font-size: 20px;
+    color: #E91E63;
+    margin-bottom: 40px;
+}
+
+.redirect-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #333;
+    border-top: 4px solid #E91E63;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 30px auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.redirect-message {
+    color: #aaa;
+    font-size: 13px;
+    margin-top: 30px;
+}
+
+.redirect-message a {
+    color: #E91E63;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.redirect-message a:hover {
+    text-decoration: underline;
+}
+
+/* ROBLOX FRAME MODAL */
 .frame-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    z-index: 9999;
+    z-index: 10001;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     visibility: hidden;
     opacity: 0;
     transition: visibility 0.2s, opacity 0.3s ease;
+    overflow-y: auto;
+    padding-top: 60px;
 }
 
-.frame-overlay.active {
+.frame-overlay:not(.hidden) {
     visibility: visible;
     opacity: 1;
+}
+
+.frame-overlay.hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .frame-card {
@@ -60,13 +433,12 @@ body {
     border-radius: 24px;
     overflow: hidden;
     position: relative;
-    margin-top: 60px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     transform: translateY(-100%);
     transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 }
 
-.frame-overlay.active .frame-card {
+.frame-overlay:not(.hidden) .frame-card {
     transform: translateY(0);
 }
 
@@ -125,10 +497,6 @@ body {
     animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
 .frame-loader p {
     color: #5a6e8a;
     font-size: 0.85rem;
@@ -142,19 +510,67 @@ body {
     background: white;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 16px 20px;
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 15px;
+        font-size: 13px;
+    }
+
+    .header-buttons {
+        gap: 8px;
+    }
+
+    .manage-btn, .signin-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .signin-box {
+        padding: 40px 30px;
+    }
+
+    .signin-box h1 {
+        font-size: 24px;
+    }
+}
+
 @media (max-width: 550px) {
+    .logo span {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .signin-box {
+        padding: 30px 20px;
+    }
+
     .frame-card {
         width: 95%;
-        margin-top: 40px;
+        margin-top: 20px;
     }
+
     .roblox-login-iframe {
-        height: 520px;
+        height: 480px;
     }
+
     .frame-close {
         top: 8px;
         right: 12px;
         width: 30px;
         height: 30px;
         font-size: 16px;
+    }
+
+    .oauth-card, .redirect-card {
+        width: 95%;
     }
 }

