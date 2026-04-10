@@ -1,0 +1,10 @@
+{
+  "name": "rover-roblox-oauth",
+  "version": "1.0.0",
+  "description": "RoVer Roblox OAuth login flow",
+  "scripts": {
+    "start": "npx http-server -p 3000 -c-1"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
